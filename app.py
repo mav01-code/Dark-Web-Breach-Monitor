@@ -54,7 +54,7 @@ def credentials():
 def check():
     # if "user" not in session:
     #     return redirect(url_for("login"))
-    email = session["user"] or "mav@gmail.com"
+    email = session.get("user", request.args.get("email", "mav@gmail.com"))
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(f"SELECT PASSWORD FROM CREDENTIALS WHERE EMAIL = '{email}'")
