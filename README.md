@@ -10,6 +10,9 @@ Create a monitoring dashboard that leverages breach APIs like Have I Been Pwned 
 4) Real-time Monitoring - Azure Functions and line plot
 5) API Integration (for data breach DB) - Have I Been Pwned?
 
+### Architecture Diagram
+![Architecture Diagram](diagram.png)
+
 ### High Level Architecture
 - Flow:
     - Register
