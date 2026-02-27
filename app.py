@@ -12,8 +12,8 @@ def get_connection():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
+        email = request.form.get("email") or request.args.get("email")
+        password = request.form.get("password") or request.args.get("password")
         if not email or not password:
             return "Email and password required", 400
         conn = get_connection()
@@ -57,38 +57,40 @@ def credential_storage():
 def credentials():
     email = request.form.get("email") or request.args.get("email")
     password = request.form.get("password") or request.args.get("password")
+    if not email or not password:
+        return "Email and password required", 400
     conn = get_connection()
     cursor = conn.cursor()
     hashed = hashlib.sha1(password.encode("utf-8")).hexdigest().upper()
-    cursor.execute(f"INSERT INTO CREDENTIALS VALUES('{email}', '{hashed}')")
-    conn.commit()
+    cursor.execute("SELECT 1 FROM CREDENTIALS WHERE EMAIL = %s", (email,))
+    exists = cursor.fetchone()
+    if not exists:
+        cursor.execute("INSERT INTO CREDENTIALS (EMAIL, PASSWORD) VALUES (%s, %s)", (email, hashed))
+        conn.commit()
     conn.close()
     return [email, hashed]
 
-@app.route("/check", methods = ["GET"])
+@app.route("/check", methods=["GET", "POST"])
 def check():
     if "user" not in session:
         return redirect(url_for("login"))
-    email = session.get("user", request.args.get("email", "mav@gmail.com"))
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(f"SELECT PASSWORD FROM CREDENTIALS WHERE EMAIL = '{email}'")
-    password = cursor.fetchone()[0] or request.args.get("password")
-    five = password[:5]
-    later = password[5:]
-    url = f"https://api.pwnedpasswords.com/range/{five}"
-    res = requests.get(url)
-    found = False
+    password = request.form.get("password") or request.args.get("password")
+    if not password:
+        return "Password required", 400
+
+    password_hash = hashlib.sha1(password.encode("utf-8")).hexdigest().upper()
+    five = password_hash[:5]
+    later = password_hash[5:]
+
+    headers = {"User-Agent": "FlaskPasswordMonitorApp"}
+    res = requests.get(f"https://api.pwnedpasswords.com/range/{five}", headers=headers)
+
     for line in res.text.splitlines():
         suffix, count = line.split(":")
         if suffix.upper() == later:
-            found = True
-            break
-    conn.close()
-    if found:
-        return "FOUND IN DATA BREACH. PLEASE CHANGE YOUR PASSWORD FOR ASSOCIATED ACCOUNTS"
-    else:
-        return "SAFE. PASSWORD NOT FOUND IN DATA BREACH"
+            return "FOUND IN DATA BREACH"
+
+    return "SAFE"
 
 @app.route("/logout")
 def logout():
