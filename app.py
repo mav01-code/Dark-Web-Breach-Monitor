@@ -9,26 +9,25 @@ app.secret_key = "password"
 def get_connection():
     return mysql.connector.connect(host = "localhost", user = "root", password = "", database = "MONITOR")
 
-@app.route("/register", methods=["POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    email = request.form.get("email") or request.args.get("email")
-    password = request.form.get("password") or request.args.get("password")
-    if not email or not password:
-        return "Email and password are required", 400
-
-    conn = get_connection()
-    cursor = conn.cursor()
-    try:
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        if not email or not password:
+            return "Email and password required", 400
+        conn = get_connection()
+        cursor = conn.cursor()
         cursor.execute("INSERT INTO REGISTER (EMAIL, PASSWORD) VALUES (%s, %s)", (email, password))
         conn.commit()
-    except mysql.connector.Error as e:
-        return f"Database error: {e}", 400
-    finally:
         conn.close()
-    return "SUCCESS"
+        return redirect(url_for("login"))
+    return render_template("register.html")
 
-@app.route("/login", methods = ["POST"])
+@app.route("/login", methods = ["GET", "POST"])
 def login():
+    if request.method == "GET":
+        return render_template("login.html")
     email = request.form.get("email") or request.args.get("email")
     password = request.form.get("password") or request.args.get("password")
     conn = get_connection()
@@ -36,7 +35,23 @@ def login():
     cursor.execute(f"SELECT email, password FROM REGISTER where email = '{email}' AND password = '{password}'")
     user = cursor.fetchone()
     conn.close()
-    return "SUCCESS"
+    if user:
+        session["user"] = email
+        return redirect(url_for("dashboard"))
+    else:
+        return render_template("login.html", error="Invalid email or password")
+
+@app.route("/dashboard", methods = ["GET"])
+def dashboard():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return render_template("dashboard.html")
+
+@app.route("/credential-storage", methods = ["GET"])
+def credential_storage():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return render_template("credential-storage.html")
 
 @app.route("/credentials", methods = ["POST"])
 def credentials():
@@ -52,8 +67,8 @@ def credentials():
 
 @app.route("/check", methods = ["GET"])
 def check():
-    # if "user" not in session:
-    #     return redirect(url_for("login"))
+    if "user" not in session:
+        return redirect(url_for("login"))
     email = session.get("user", request.args.get("email", "mav@gmail.com"))
     conn = get_connection()
     cursor = conn.cursor()
