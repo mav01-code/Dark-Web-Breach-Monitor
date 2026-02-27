@@ -1,0 +1,4 @@
+Flask
+azure-functions
+mysql-connector-python
+requests

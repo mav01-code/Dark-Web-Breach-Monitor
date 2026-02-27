@@ -92,6 +92,24 @@ def check():
 
     return "SAFE"
 
+@app.route("/api/monitoring-data")
+def monitoring_data():
+    if "user" not in session:
+        return {"error": "Unauthorized"}, 401
+    
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT TIMESTAMP, BREACHES_FOUND, CREDENTIALS_CHECKED FROM MONITOR_LOGS ORDER BY TIMESTAMP DESC LIMIT 20")
+    logs = cursor.fetchall()
+    conn.close()
+    
+    data = {
+        "timestamps": [log[0].strftime("%Y-%m-%d %H:%M:%S") for log in reversed(logs)],
+        "breaches": [log[1] for log in reversed(logs)],
+        "credentials": [log[2] for log in reversed(logs)]
+    }
+    return data
+
 @app.route("/logout")
 def logout():
     session.pop("user", None)
