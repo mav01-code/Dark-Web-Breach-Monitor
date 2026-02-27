@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #f7f8fc 0%, #eef0f6 100%);
+            background: #000000;
             min-height: 100vh;
             display: flex;
             letter-spacing: -0.01em;
@@ -26,10 +26,10 @@
             left: 0;
             right: 0;
             height: 72px;
-            background: rgba(255, 255, 255, 0.95);
+            background: #0a0a0a;
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(78, 10, 105, 0.08);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 24px rgba(255, 255, 255, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -44,10 +44,7 @@
         }
 
         .navbar-brand h1 {
-            background: linear-gradient(135deg, #4E0A69 0%, #6b0e8f 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
             font-size: 20px;
             font-weight: 700;
             letter-spacing: 0.5px;
@@ -64,18 +61,18 @@
         }
 
         .user-email {
-            color: #666;
+            color: #aaaaaa;
             font-size: 13px;
             font-weight: 500;
             padding: 8px 16px;
-            background: rgba(78, 10, 105, 0.04);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
-            border: 1px solid rgba(78, 10, 105, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .btn-logout {
-            background: linear-gradient(135deg, #6b0e8f 0%, #4E0A69 100%);
-            color: white;
+            background: #ffffff;
+            color: #000000;
             border: none;
             padding: 10px 24px;
             border-radius: 10px;
@@ -84,13 +81,13 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
-            box-shadow: 0 2px 8px rgba(78, 10, 105, 0.2);
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
         }
 
         .btn-logout:hover {
-            background: linear-gradient(135deg, #7012a0 0%, #5d0c7f 100%);
+            background: #e0e0e0;
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(78, 10, 105, 0.35);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.35);
         }
 
         /* Sidebar */
@@ -100,23 +97,23 @@
             top: 72px;
             width: 280px;
             height: calc(100vh - 72px);
-            background: rgba(255, 255, 255, 0.85);
+            background: #0a0a0a;
             backdrop-filter: blur(12px);
-            border-right: 1px solid rgba(78, 10, 105, 0.08);
-            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.04);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 4px 0 24px rgba(255, 255, 255, 0.05);
             padding: 32px 20px;
             overflow-y: auto;
         }
 
         .sidebar-title {
-            color: #6b0e8f;
+            color: #ffffff;
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.2px;
             margin-bottom: 20px;
             padding-bottom: 12px;
-            border-bottom: 1px solid rgba(78, 10, 105, 0.12);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .sidebar-menu {
@@ -132,7 +129,7 @@
             align-items: center;
             gap: 12px;
             padding: 12px 16px;
-            color: #555;
+            color: #aaaaaa;
             text-decoration: none;
             border-radius: 10px;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -142,16 +139,16 @@
         }
 
         .sidebar-menu a:hover {
-            background: rgba(78, 10, 105, 0.08);
-            color: #4E0A69;
-            border-color: rgba(78, 10, 105, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.15);
             transform: translateX(2px);
         }
 
         .sidebar-menu a.active {
-            background: linear-gradient(135deg, #6b0e8f 0%, #4E0A69 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(78, 10, 105, 0.25);
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25);
             border-color: rgba(255, 255, 255, 0.2);
         }
 
@@ -171,7 +168,7 @@
         }
 
         .page-title {
-            color: #1a1a1a;
+            color: #ffffff;
             font-size: 36px;
             font-weight: 700;
             margin-bottom: 8px;
@@ -179,7 +176,7 @@
         }
 
         .page-subtitle {
-            color: #666;
+            color: #aaaaaa;
             font-size: 15px;
             font-weight: 400;
             margin-bottom: 48px;
@@ -188,22 +185,22 @@
 
         /* Monitoring Card */
         .monitoring-card {
-            background: rgba(255, 255, 255, 0.8);
+            background: #0a0a0a;
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(78, 10, 105, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 48px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.05);
         }
 
         .monitoring-status {
-            background: linear-gradient(135deg, #6b0e8f 0%, #7012a0 50%, #4E0A69 100%);
+            background: #1a1a1a;
             color: white;
             padding: 36px 40px;
             border-radius: 16px;
             text-align: center;
             margin-bottom: 36px;
-            box-shadow: 0 8px 24px rgba(78, 10, 105, 0.25);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -225,12 +222,12 @@
         }
 
         .info-box {
-            background: rgba(255, 255, 255, 0.6);
+            background: #1a1a1a;
             backdrop-filter: blur(8px);
             padding: 28px;
             border-radius: 14px;
-            border-left: 3px solid #6b0e8f;
-            border: 1px solid rgba(78, 10, 105, 0.12);
+            border-left: 3px solid #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -243,15 +240,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(78, 10, 105, 0.04) 0%, transparent 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
         .info-box:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(78, 10, 105, 0.15);
-            border-color: rgba(78, 10, 105, 0.25);
+            box-shadow: 0 12px 32px rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
             border-left-width: 3px;
         }
 
@@ -260,7 +257,7 @@
         }
 
         .info-box h3 {
-            color: #4E0A69;
+            color: #ffffff;
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 10px;
@@ -269,7 +266,7 @@
         }
 
         .info-box p {
-            color: #555;
+            color: #aaaaaa;
             font-size: 14px;
             line-height: 1.7;
             position: relative;
@@ -279,7 +276,7 @@
         .coming-soon {
             text-align: center;
             padding: 48px;
-            color: #888;
+            color: #666;
             margin-top: 24px;
         }
 
@@ -384,13 +381,12 @@
             </li>
             <li>
                 <a href="/credential-storage">
-                    Credential Storage
+                    Credential Security Check
                 </a>
             </li>
         </ul>
     </aside>
 
-    <!-- Main Content -->
     <main class="main-content">
         <h1 class="page-title">Real-Time Monitoring</h1>
         <p class="page-subtitle">Monitor your credentials for security threats and data breaches</p>

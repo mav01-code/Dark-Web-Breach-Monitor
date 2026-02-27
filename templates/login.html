@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a0b2e 0%, #4E0A69 100%);
+            background: #000000;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -22,13 +22,13 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: #0a0a0a;
             border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(78, 10, 105, 0.4);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.1);
             padding: 40px;
             width: 100%;
             max-width: 450px;
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
@@ -37,26 +37,26 @@
         }
 
         .logo h1 {
-            color: #4E0A69;
+            color: #ffffff;
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 8px;
         }
 
         .logo p {
-            color: #666;
+            color: #aaaaaa;
             font-size: 14px;
         }
 
         .form-title {
-            color: #333;
+            color: #ffffff;
             font-size: 24px;
             margin-bottom: 10px;
             text-align: center;
         }
 
         .form-subtitle {
-            color: #666;
+            color: #aaaaaa;
             font-size: 14px;
             margin-bottom: 30px;
             text-align: center;
@@ -68,7 +68,7 @@
 
         label {
             display: block;
-            color: #333;
+            color: #ffffff;
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 8px;
@@ -78,23 +78,24 @@
         input[type="password"] {
             width: 100%;
             padding: 14px 16px;
-            border: 2px solid #e0e0e0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
             font-size: 15px;
             transition: all 0.3s ease;
-            background: #fff;
+            background: #1a1a1a;
+            color: #ffffff;
         }
 
         input[type="email"]:focus,
         input[type="password"]:focus {
             outline: none;
-            border-color: #4E0A69;
-            box-shadow: 0 0 0 4px rgba(78, 10, 105, 0.1);
+            border-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
         }
 
         input[type="email"]::placeholder,
         input[type="password"]::placeholder {
-            color: #999;
+            color: #666;
         }
 
         .form-footer {
@@ -107,7 +108,7 @@
         .remember-me {
             display: flex;
             align-items: center;
-            color: #666;
+            color: #aaaaaa;
             font-size: 14px;
         }
 
@@ -117,7 +118,7 @@
         }
 
         .forgot-password {
-            color: #4E0A69;
+            color: #ffffff;
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
@@ -125,15 +126,15 @@
         }
 
         .forgot-password:hover {
-            color: #6b0e8f;
+            color: #e0e0e0;
             text-decoration: underline;
         }
 
         .btn-login {
             width: 100%;
             padding: 14px;
-            background: #4E0A69;
-            color: white;
+            background: #ffffff;
+            color: #000000;
             border: none;
             border-radius: 8px;
             font-size: 16px;
@@ -143,9 +144,9 @@
         }
 
         .btn-login:hover {
-            background: #6b0e8f;
+            background: #e0e0e0;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(78, 10, 105, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
         }
 
         .btn-login:active {
@@ -156,7 +157,7 @@
             display: flex;
             align-items: center;
             margin: 25px 0;
-            color: #999;
+            color: #666;
             font-size: 14px;
         }
 
@@ -165,7 +166,7 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: #e0e0e0;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .divider span {
@@ -174,19 +175,19 @@
 
         .register-link {
             text-align: center;
-            color: #666;
+            color: #aaaaaa;
             font-size: 14px;
         }
 
         .register-link a {
-            color: #4E0A69;
+            color: #ffffff;
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s ease;
         }
 
         .register-link a:hover {
-            color: #6b0e8f;
+            color: #e0e0e0;
             text-decoration: underline;
         }
 
@@ -198,15 +199,15 @@
         }
 
         .alert-error {
-            background: #fee;
-            color: #c33;
-            border: 1px solid #fcc;
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         .alert-success {
-            background: #efe;
-            color: #3c3;
-            border: 1px solid #cfc;
+            background: rgba(74, 222, 128, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
         }
 
         @media (max-width: 480px) {
