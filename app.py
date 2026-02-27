@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = "password"
 
 def get_connection():
-    return mysql.connector.connect(host = "localhost", user = "root", password = "", database = "MONITOR")
+    return mysql.connector.connect(host = "localhost", user = "root", password = "Varshini@102006", database = "MONITOR")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -52,6 +52,12 @@ def credential_storage():
     if "user" not in session:
         return redirect(url_for("login"))
     return render_template("credential-storage.html")
+
+@app.route("/remediation", methods=["GET"])
+def remediation():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return render_template("remediation.html")
 
 @app.route("/credentials", methods = ["POST"])
 def credentials():
@@ -109,6 +115,62 @@ def monitoring_data():
         "credentials": [log[2] for log in reversed(logs)]
     }
     return data
+
+@app.route("/api/remediation-recommendations", methods=["POST"])
+def remediation_recommendations():
+    if "user" not in session:
+        return {"error": "Unauthorized"}, 401
+
+    payload = request.get_json(silent=True) or {}
+    breaches = request.form.get("breaches") or payload.get("breaches")
+    password_age_days = request.form.get("password_age_days") or payload.get("password_age_days")
+    mfa_enabled = request.form.get("mfa_enabled") or payload.get("mfa_enabled")
+
+    try:
+        breach_count = int(breaches or 0)
+        age_days = int(password_age_days or 0)
+    except ValueError:
+        return {"error": "Invalid numeric values"}, 400
+
+    mfa_on = str(mfa_enabled).lower() in ["yes", "true", "1", "on"]
+
+    recommendations = []
+    risk_score = 0
+
+    if breach_count > 0:
+        risk_score += 45
+        recommendations.append("Change affected passwords immediately and avoid reusing them across accounts.")
+        recommendations.append("Enable breach alerts and review account activity for unauthorized access.")
+    else:
+        recommendations.append("No immediate breach exposure detected. Keep monitoring enabled.")
+
+    if age_days >= 90:
+        risk_score += 25
+        recommendations.append("Rotate passwords older than 90 days and use unique passphrases.")
+    elif age_days >= 60:
+        risk_score += 15
+        recommendations.append("Plan password rotation soon to reduce long-term credential risk.")
+    else:
+        recommendations.append("Password age is within a safer rotation window.")
+
+    if not mfa_on:
+        risk_score += 30
+        recommendations.append("Enable MFA on all critical accounts (email, banking, cloud, social).")
+    else:
+        recommendations.append("MFA is enabled, which significantly reduces account takeover risk.")
+
+    if risk_score >= 70:
+        risk_level = "HIGH"
+    elif risk_score >= 40:
+        risk_level = "MEDIUM"
+    else:
+        risk_level = "LOW"
+
+    return {
+        "risk_level": risk_level,
+        "risk_score": risk_score,
+        "recommendations": recommendations
+    }
 
 @app.route("/logout")
 def logout():

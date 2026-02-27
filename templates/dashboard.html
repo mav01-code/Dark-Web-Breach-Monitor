@@ -405,6 +405,11 @@
                     Credential Security Check
                 </a>
             </li>
+            <li>
+                <a href="/remediation">
+                    Remediation Recommendations
+                </a>
+            </li>
         </ul>
     </aside>
 
@@ -465,7 +470,6 @@
                 if (data.timestamps && data.timestamps.length > 0) {
                     updateChart(data);
                 } else {
-                    // Display message if no data
                     console.log('No monitoring data available yet');
                 }
             } catch (error) {
