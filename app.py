@@ -10,9 +10,16 @@ def get_connection():
 
 @app.route("/register", methods = ["POST"])
 def register():
-    pass
+    email = request.form["email"]
+    password = request.form["password"]
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(f"INSERT INTO REGISTER VALUES('{email}', '{password}')")
+    conn.commit()
+    conn.close()
+    return redirect(url_for("login"))
 
-@app.route("/login", methods = ["GET"])
+@app.route("/login", methods = ["POST"])
 def login():
     pass
 
