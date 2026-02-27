@@ -39,9 +39,18 @@ Create a monitoring dashboard that leverages breach APIs like Have I Been Pwned 
             - Rule based score
                 - If the breach count is greater than zero, score gets updated by 45
                 - If the password age is greater than or equal to 90, score is updated by 25
-                - If the password age is greater than or equal to 60, score is updated by 15
+                - If the passwords age is greater than or equal to 60, score is updated by 15
                 - If there is no multi factor authentication, score is updated by 30
                 - If the score is greater than or equal to 70, the risk level is high
                 - If the score is greater than or equal to 40, the risk level is medium
                 - Else it's low
 
+### API Integration Documentation
+- url: https://api.pwnedpasswords.com/range/{first 5 characters}
+- Convert the password to SHA1
+- Take first 5 characters and paste it in the arguments of url
+- You get all the matching passwords
+- Leave the first 5 characters and check if the rest of the characters match any of the resultant string in the tuple
+
+### Demonstration video
+[Watch the demo video](DarkWebBreachMonitor.mp4)
